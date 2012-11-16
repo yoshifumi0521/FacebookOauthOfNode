@@ -3,6 +3,8 @@
  * Module dependencies.
  */
 
+var test = require("./routes/informations");
+
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
