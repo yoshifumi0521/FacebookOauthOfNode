@@ -50,28 +50,24 @@ passport.use(new FacebookStrategy({
 
   function(accessToken, refreshToken, profile, done){
       // 認証後返されるaccessTokenをセッションに持たせておく
-      passport.session.accessToken = accessToken;
+      //passport.session.accessToken = accessToken;
       //Facebookから返されるProfileをそのままユーザ情報としてセッションで保持するようにしておく
       process.nextTick(function(){
          done(null ,profile);
-  });
+      });
+  }
 
-
-}));
-
-
+));
 
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
-
 
 //ここからルーティング設定
 app.get('/', routes.index);
 app.get('/users', user.list);
 //localhost:3000/authで、Facebookにリダイレクトして認証を行う。
 app.get('/oauth', passport.authenticate('facebook'));
-
 
 
 http.createServer(app).listen(app.get('port'), function(){
